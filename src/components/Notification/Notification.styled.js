@@ -8,7 +8,7 @@ const Wrapper = styled('div')(() => {
     alignItems: 'center',
     gap: 10,
     backgroundColor: 'rgba(255, 255, 255, 0.7)',
-    width: 400,
+    width: 300,
     padding: 20,
     borderRadius: 10,
   };
