@@ -13,16 +13,17 @@ export class App extends Component {
     bad: 0,
   };
 
-  feedbackOptionsArr = Object.keys(this.state);
-
-  countTotalFeedback = (goodVotes, neutralVotes, badVotes) => {
-    return goodVotes + neutralVotes + badVotes;
+  countTotalFeedback = ({ good, neutral, bad }) => {
+    return good + neutral + bad;
   };
 
-  countPositiveFeedbackPercentage = (goodVotes, neutralVotes, badVotes) => {
-    return Math.round(
-      (goodVotes * 100) / (goodVotes + neutralVotes + badVotes)
-    );
+  countPositiveFeedbackPercentage = ({ good, neutral, bad }) => {
+    const total = this.countTotalFeedback({ good, neutral, bad });
+    if (total) {
+      return Math.round((good * 100) / total);
+    } else {
+      return null;
+    }
   };
 
   feedbackHandler = option => {
@@ -36,30 +37,20 @@ export class App extends Component {
       <>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            options={this.feedbackOptionsArr}
+            options={Object.keys(this.state)}
             onLeaveFeedback={this.feedbackHandler}
           />
         </Section>
 
-        {this.countTotalFeedback(
-          this.state.good,
-          this.state.neutral,
-          this.state.bad
-        ) ? (
+        {this.countTotalFeedback(this.state) ? (
           <Section title="Statistics">
             <Statistics
               good={this.state.good}
               neutral={this.state.neutral}
               bad={this.state.bad}
-              total={this.countTotalFeedback(
-                this.state.good,
-                this.state.neutral,
-                this.state.bad
-              )}
+              total={this.countTotalFeedback(this.state)}
               positivePercentage={this.countPositiveFeedbackPercentage(
-                this.state.good,
-                this.state.neutral,
-                this.state.bad
+                this.state
               )}
             />
           </Section>

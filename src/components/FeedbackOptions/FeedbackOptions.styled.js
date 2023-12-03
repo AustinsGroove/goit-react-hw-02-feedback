@@ -7,6 +7,7 @@ const Wrapper = styled('div')(() => {
       gap: 10,
       li: {
         button: {
+          textTransform: 'capitalize',
           width: 100,
           padding: 10,
           borderRadius: 10,

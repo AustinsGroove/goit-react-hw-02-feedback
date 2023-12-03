@@ -1,11 +1,6 @@
 import Wrapper from './FeedbackOptions.styled';
 
 const FeedbackOptions = ({ options, onLeaveFeedback }) => {
-  const btnText = {
-    good: 'Good',
-    neutral: 'Neutral',
-    bad: 'Bad',
-  };
   return (
     <Wrapper>
       <ul>
@@ -19,7 +14,7 @@ const FeedbackOptions = ({ options, onLeaveFeedback }) => {
                   onLeaveFeedback(option);
                 }}
               >
-                {btnText[option]}
+                {option}
               </button>
             </li>
           );
